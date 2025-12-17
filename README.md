@@ -6,6 +6,7 @@ Build & run
 
 - Build: `make`
 - Run: `make run`
+- Build .app bundle: `make bundle` (creates `build/QuickNotes.app`; you can move it to `/Applications`, data will live in `/Applications/QuickNotesData`).
 
 Behavior
 

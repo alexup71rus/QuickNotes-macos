@@ -130,6 +130,21 @@ class StatusMenuController: NSObject, NSWindowDelegate {
 
         var y = view.bounds.height - padding - labelHeight
 
+        let launchAtLogin = NSButton(checkboxWithTitle: "Launch at login", target: self, action: #selector(toggleLaunchAtLogin(_:)))
+        launchAtLogin.frame = NSRect(x: padding, y: y, width: view.bounds.width - padding * 2, height: labelHeight)
+        launchAtLogin.state = Settings.shared.launchAtLogin ? .on : .off
+        launchAtLogin.autoresizingMask = [.width]
+        view.addSubview(launchAtLogin)
+
+        y -= labelHeight
+
+        let separator = NSBox(frame: NSRect(x: padding, y: y, width: view.bounds.width - padding * 2, height: 1))
+        separator.boxType = .separator
+        separator.autoresizingMask = [.width]
+        view.addSubview(separator)
+
+        y -= (labelHeight * 2)
+
         let debounce = NSButton(checkboxWithTitle: "Use debounce save (0.8s)", target: self, action: #selector(toggleDebounce(_:)))
         debounce.frame = NSRect(x: padding, y: y, width: view.bounds.width - padding * 2, height: labelHeight)
         debounce.state = Settings.shared.useDebounce ? .on : .off
@@ -151,14 +166,6 @@ class StatusMenuController: NSObject, NSWindowDelegate {
         sortByModified.state = Settings.shared.sortByModified ? .on : .off
         sortByModified.autoresizingMask = [.width]
         view.addSubview(sortByModified)
-
-        y -= (labelHeight + lineSpacing)
-
-        let launchAtLogin = NSButton(checkboxWithTitle: "Launch at login", target: self, action: #selector(toggleLaunchAtLogin(_:)))
-        launchAtLogin.frame = NSRect(x: padding, y: y, width: view.bounds.width - padding * 2, height: labelHeight)
-        launchAtLogin.state = Settings.shared.launchAtLogin ? .on : .off
-        launchAtLogin.autoresizingMask = [.width]
-        view.addSubview(launchAtLogin)
 
         y -= (labelHeight + lineSpacing)
 
