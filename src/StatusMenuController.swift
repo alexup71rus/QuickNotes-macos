@@ -10,10 +10,8 @@ class StatusMenuController: NSObject, NSWindowDelegate {
         super.init()
 
         if let button = statusItem.button {
-            let exeDir = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
-            let iconPath = exeDir.appendingPathComponent("icon.png").path
             var finalImage: NSImage?
-            if FileManager.default.fileExists(atPath: iconPath), let img = NSImage(contentsOfFile: iconPath) {
+            if let iconURL = DataPaths.trayIconFile, let img = NSImage(contentsOf: iconURL) {
                 img.isTemplate = true
                 img.size = NSSize(width: 24, height: 24)
                 finalImage = img
@@ -87,7 +85,7 @@ class StatusMenuController: NSObject, NSWindowDelegate {
                              styleMask: [.titled, .closable, .resizable],
                              backing: .buffered,
                              defer: false)
-            w.title = "QuickNote"
+            w.title = "QuickNotes"
             w.isReleasedWhenClosed = false
             w.delegate = self
 

@@ -2,12 +2,11 @@ import Foundation
 
 struct Logger {
     private static var logDirectory: URL {
-        let exe = URL(fileURLWithPath: CommandLine.arguments[0])
-        return exe.deletingLastPathComponent().appendingPathComponent("QuickNotesLogs", isDirectory: true)
+        return DataPaths.logsDirectory
     }
 
     private static var logFileURL: URL {
-        return logDirectory.appendingPathComponent("quicknote.log")
+        return logDirectory.appendingPathComponent("quicknotes.log")
     }
 
     private static func ensureDir() {

@@ -4,10 +4,7 @@ final class Settings {
     static let shared = Settings()
 
     private let fileURL: URL = {
-        let exe = URL(fileURLWithPath: CommandLine.arguments[0])
-        let dir = exe.deletingLastPathComponent().appendingPathComponent("QuickNotesSettings", isDirectory: true)
-        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
-        return dir.appendingPathComponent("settings.json")
+        return DataPaths.settingsFile
     }()
 
     private struct Payload: Codable {

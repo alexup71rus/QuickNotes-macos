@@ -1,11 +1,9 @@
 import Foundation
 
 struct Storage {
-    // Directory next to the executable: <exe_dir>/QuickNotes
+    // Directory next to the executable: <exe_dir>/QuickNotesData/QuickNotesContent
     static var notesDirectory: URL {
-        let exe = URL(fileURLWithPath: CommandLine.arguments[0])
-        let dir = exe.deletingLastPathComponent().appendingPathComponent("QuickNotes", isDirectory: true)
-        return dir
+        return DataPaths.notesDirectory
     }
 
     static func ensureDir() throws {
