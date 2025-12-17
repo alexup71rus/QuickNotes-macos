@@ -13,6 +13,7 @@ final class Settings {
         var backgroundHex: String
         var autoTitleFromFirstSentence: Bool
         var sortByModified: Bool
+        var launchAtLogin: Bool?
     }
 
     private var _useDebounce: Bool = true
@@ -20,6 +21,7 @@ final class Settings {
     private var _backgroundColor: NSColor = NSColor.textBackgroundColor
     private var _autoTitleFromFirstSentence: Bool = false
     private var _sortByModified: Bool = false
+    private var _launchAtLogin: Bool = AutoLaunchManager.isEnabled()
     private var isLoading = false
 
     var useDebounce: Bool {
@@ -47,6 +49,11 @@ final class Settings {
         set { update { _sortByModified = newValue } }
     }
 
+    var launchAtLogin: Bool {
+        get { _launchAtLogin }
+        set { update { _launchAtLogin = newValue; AutoLaunchManager.setEnabled(newValue) } }
+    }
+
     private init() {
         load()
     }
@@ -60,6 +67,8 @@ final class Settings {
         _backgroundColor = Settings.color(fromHex: payload.backgroundHex) ?? NSColor.textBackgroundColor
         _autoTitleFromFirstSentence = payload.autoTitleFromFirstSentence
         _sortByModified = payload.sortByModified
+        _launchAtLogin = payload.launchAtLogin ?? _launchAtLogin
+        AutoLaunchManager.setEnabled(_launchAtLogin)
         isLoading = false
     }
 
@@ -68,7 +77,8 @@ final class Settings {
                               fontSize: _fontSize,
                               backgroundHex: Settings.hexString(from: _backgroundColor),
                               autoTitleFromFirstSentence: _autoTitleFromFirstSentence,
-                              sortByModified: _sortByModified)
+                              sortByModified: _sortByModified,
+                              launchAtLogin: _launchAtLogin)
         if let data = try? JSONEncoder().encode(payload) {
             try? data.write(to: fileURL, options: [.atomic])
         }

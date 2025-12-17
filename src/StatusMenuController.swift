@@ -154,6 +154,14 @@ class StatusMenuController: NSObject, NSWindowDelegate {
 
         y -= (labelHeight + lineSpacing)
 
+        let launchAtLogin = NSButton(checkboxWithTitle: "Launch at login", target: self, action: #selector(toggleLaunchAtLogin(_:)))
+        launchAtLogin.frame = NSRect(x: padding, y: y, width: view.bounds.width - padding * 2, height: labelHeight)
+        launchAtLogin.state = Settings.shared.launchAtLogin ? .on : .off
+        launchAtLogin.autoresizingMask = [.width]
+        view.addSubview(launchAtLogin)
+
+        y -= (labelHeight + lineSpacing)
+
         let fontLabel = NSTextField(labelWithString: "Font size:")
         fontLabel.frame = NSRect(x: padding, y: y, width: 80, height: labelHeight)
             fontLabel.autoresizingMask = [.maxXMargin]
@@ -191,6 +199,10 @@ class StatusMenuController: NSObject, NSWindowDelegate {
 
     @objc private func toggleSortByModified(_ sender: NSButton) {
         Settings.shared.sortByModified = (sender.state == .on)
+    }
+
+    @objc private func toggleLaunchAtLogin(_ sender: NSButton) {
+        Settings.shared.launchAtLogin = (sender.state == .on)
     }
 
     @objc private func changeFontSize(_ sender: NSTextField) {
