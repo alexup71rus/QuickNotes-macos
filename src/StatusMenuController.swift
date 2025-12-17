@@ -10,8 +10,8 @@ class StatusMenuController: NSObject, NSWindowDelegate {
         super.init()
 
         if let button = statusItem.button {
-            let cwd = FileManager.default.currentDirectoryPath
-            let iconPath = (cwd as NSString).appendingPathComponent("icon.png")
+            let exeDir = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
+            let iconPath = exeDir.appendingPathComponent("icon.png").path
             var finalImage: NSImage?
             if FileManager.default.fileExists(atPath: iconPath), let img = NSImage(contentsOfFile: iconPath) {
                 img.isTemplate = true

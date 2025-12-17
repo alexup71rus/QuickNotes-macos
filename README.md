@@ -11,7 +11,7 @@ Behavior
 
 - Notes are stored as separate `.txt` files under `QuickNotes` next to the built binary; names use a human-readable timestamp unless auto-titles are enabled.
 - Logs (errors only) are written to `QuickNotesLogs/quicknote.log` next to the binary.
-- Status icon: drop `icon.png` next to the binary; if not present, a simple pencil icon is drawn in code.
+- Status icon: drop `icon.png` next to the binary (Makefile copies it into `build/` on build; lookup is relative to the executable). If not present, a simple pencil icon is drawn in code.
 - Settings window (right-click → Settings): toggle debounce saving, auto-title from first sentence, font size, background color.
 - Settings persist to `QuickNotesSettings/settings.json` next to the binary.
 - Sorting: dropdown follows Settings — creation date (default) or modification date.

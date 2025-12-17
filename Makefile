@@ -13,9 +13,11 @@ $(BUILD_DIR):
 
 $(BUILD_DIR)/$(APP_NAME): $(SRC) Makefile | $(BUILD_DIR)
 	$(SWIFTC) -o $@ $(SRC) -sdk $(SDK)
+	@if [ -f icon.png ]; then cp -f icon.png $(BUILD_DIR)/icon.png; fi
 
 $(BUILD_DIR)/$(APP_NAME)-debug: $(SRC) Makefile | $(BUILD_DIR)
 	$(SWIFTC) -DDEBUG -o $@ $(SRC) -sdk $(SDK)
+	@if [ -f icon.png ]; then cp -f icon.png $(BUILD_DIR)/icon.png; fi
 
 build: $(BUILD_DIR)/$(APP_NAME)
 
