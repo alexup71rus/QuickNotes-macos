@@ -21,3 +21,14 @@ Behavior
 Tech
 
 - Swift + AppKit, built with `swiftc` via Makefile; no extra dependencies.
+
+Screenshots
+
+![Popover](readme-1.jpg)
+![Settings](readme-2.jpg)
+
+License
+
+- [MIT](LICENSE)
+
+Have fun!
